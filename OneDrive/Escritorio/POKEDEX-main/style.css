@@ -1,0 +1,14 @@
+
+.object-fit{
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-pokemones{
+  background-image: url(https://www.pokemon.com/static-assets/content-assets/cms2-es-es/img/video-games/_tiles/strategy/go/mewtwo/pokemon-go-169.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center ;
+}
