@@ -32,9 +32,17 @@ const updateTareas = asyncHandler(async (req, res) => {
       throw new Error('Esa tarea no existe')
     }
 
-    const tareaUpdated = await Tarea.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    //verificar que la tarea pertenrzca al uduario del token
 
+    if(tarea.user.toString() !== req.user.id) {
+
+      res.status(401)
+      throw new Error('Acceso no autorizado')
+
+    }else {
+    const tareaUpdated = await Tarea.findByIdAndUpdate(req.params.id, req.body, {new: true})
     res.status(200).json(tareaUpdated)
+    }
   })
 
 const deleteTareas = asyncHandler (async (req, res) => {
@@ -46,9 +54,19 @@ const deleteTareas = asyncHandler (async (req, res) => {
       throw new Error('Esa tarea no existe')
     }
 
-    tarea.deleteOne()
+    //verificar que la tarea pertenrzca al uduario del token
 
-    res.status(200).json({id: req.params.id})
+    if(tarea.user.toString() !== req.user.id) {
+
+      res.status(401)
+      throw new Error('Acceso no autorizado')
+
+    }else {
+      tarea.deleteOne()
+
+      res.status(200).json({id: req.params.id})
+    }
+    
   })
 
 
